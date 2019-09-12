@@ -1,0 +1,24 @@
+{
+  "name": "blockchain-api",
+  "version": "1.0.0",
+  "description": "Blockchain API for Hyperledger's Fabric blood and rewards systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/right-donor/blockchain-API.git"
+  },
+  "author": "Fernando Martin Garcia Del Angel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/right-donor/blockchain-API/issues"
+  },
+  "homepage": "https://github.com/right-donor/blockchain-API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fabric-ca-client": "^1.4.4",
+    "fabric-network": "^1.4.4"
+  }
+}
