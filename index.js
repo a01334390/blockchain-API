@@ -16,17 +16,30 @@
  const port = 80
 
  app.use(express.json())
+
  /**
   * Creates a new blood bag
   */
  app.post('/blood/createbloodbag/:bagId/:bagOriginID/:bagLocation/:bloodType/:bloodRH/:size', asyncHandler(async (req,res,next) =>{
     const receivedParams = req.params
     if(receivedParams.bagId == "" || receivedParams.bagOriginID == "" || receivedParams.bagLocation == "" || receivedParams.bloodType == "" || receivedParams.bloodRH == "" || receivedParams.size == ""){
-        res.send(400)
+        res.sendStatus(400)
     }
-    const result = await query.main()
-    console.log(result)
-    res.send(200)
+    // const result = await query.main()
+    // console.log(result)
+    res.sendStatus(200)
+ }))
+
+ /**
+  * Reads blood bags
+  */
+ app.get('/blood/readbloodbag/:bagId/:user',asyncHandler(async (req,res,next) => {
+     const received = req.params
+     if(received.bagId == "" || received.user == "") {
+        res.sendStatus(400)
+     }
+     const result = await query.readBloodBag(received.bagId,received.user)
+     res.send(result)
  }))
 
 app.listen(port,()=>console.log(`Blockchain API listening on port ${port}!`))
