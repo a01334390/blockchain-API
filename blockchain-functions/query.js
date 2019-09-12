@@ -13,7 +13,7 @@ async function main() {
     try {
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        const walletPath = path.join(process.cwd(), '/blockchain-functions/wallet');
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -40,6 +40,7 @@ async function main() {
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('readBloodBag','1234');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        return JSON.parse(result)
 
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);
@@ -47,4 +48,6 @@ async function main() {
     }
 }
 
-main();
+module.exports = {
+    main
+}

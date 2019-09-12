@@ -10,6 +10,8 @@
  */
 "use-strict"
  const express = require('express')
+ const asyncHandler = require('express-async-handler')
+ const query = require('./blockchain-functions/query')
  const app = express()
  const port = 80
 
@@ -17,12 +19,14 @@
  /**
   * Creates a new blood bag
   */
- app.post('/blood/createbloodbag/:bagId/:bagOriginID/:bagLocation/:bloodType/:bloodRH/:size',(req,res)=>{
+ app.post('/blood/createbloodbag/:bagId/:bagOriginID/:bagLocation/:bloodType/:bloodRH/:size', asyncHandler(async (req,res,next) =>{
     const receivedParams = req.params
     if(receivedParams.bagId == "" || receivedParams.bagOriginID == "" || receivedParams.bagLocation == "" || receivedParams.bloodType == "" || receivedParams.bloodRH == "" || receivedParams.size == ""){
         res.send(400)
     }
+    const result = await query.main()
+    console.log(result)
     res.send(200)
- })
+ }))
 
 app.listen(port,()=>console.log(`Blockchain API listening on port ${port}!`))
