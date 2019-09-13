@@ -83,8 +83,18 @@ app.post('/blood/move/:bagId/:location/:user',asyncHandler(async (req,res,next) 
     if(received.bagId == "" || received.location == "" || received.user == ""){
         res.sendStatus(500)
     }
-    const result = await query.moveBagToLocation(received.bagId,received.location,received.user)
+    const result = await invoke.moveBagToLocation(received.bagId,received.location,received.user)
     res.send(result)
 }))
+
+app.post('/blood/assign/:bagId/:recipient/:destination/:user',asyncHandler(async (req,res,next) => {
+    const received = req.params
+    if(received.bagId == "" || received.recipient == "" || received.destination == "" || received.user == ""){
+        res.sendStatus(500)
+    }
+    const result = await invoke.assignBloodBagReceiver(received.bagId,received.recipient,received.destination,received.user)
+    res.send(result)
+}))
+
 
 app.listen(port,()=>console.log(`Blockchain API listening on port ${port}!`))
