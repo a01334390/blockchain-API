@@ -25,7 +25,7 @@ app.use(express.json())
  */
 app.post('/enroll', asyncHandler(async (req, res, next) => {
     const enan = await enroll.main()
-    const origin = request.get('origin');
+    const origin = req.get('origin');
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -35,7 +35,7 @@ app.post('/enroll', asyncHandler(async (req, res, next) => {
 
 app.post('/user', asyncHandler(async (req, res, next) => {
     const unan = await user.main()
-    const origin = request.get('origin');
+    const origin = req.get('origin');
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -45,7 +45,7 @@ app.post('/user', asyncHandler(async (req, res, next) => {
 
 app.post('/test', asyncHandler(async (req, res, next) => {
     const result = await invoke.testInvoke('user1')
-    const origin = request.get('origin');
+    const origin = req.get('origin');
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -185,7 +185,7 @@ app.post('/rewards/receive/:userId/:tokens/:user', asyncHandler(async (req,res,n
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
-    if (received.userId == "" || received.tokens ||received.user == "") {
+    if (received.userId == "" || received.tokens == ""||received.user == "") {
         res.sendStatus(500)
     }
     const result = await invoke.receiveTokens(received.userId,received.tokens,received.user)
@@ -199,7 +199,7 @@ app.post('/rewards/spend/:userId/:amount/:user', asyncHandler(async (req,res,nex
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
-    if (received.userId == "" || received.amount ||received.user == "") {
+    if (received.userId == "" || received.amount == "" ||received.user == "") {
         res.sendStatus(500)
     }
     const result = await invoke.spendTokens(received.userId, received.amount, received.user)
