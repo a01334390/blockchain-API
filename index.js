@@ -25,16 +25,31 @@
   */
  app.post('/enroll',asyncHandler(async (req,res,next) => {
     const enan = await enroll.main()
+	 const origin = request.get('origin');
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
     res.send(enan)
  }))
 
  app.post('/user',asyncHandler(async (req,res,next) => {
      const unan = await user.main()
+	 const origin = request.get('origin');
+	 res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
      res.send(unan)
  }))
 
  app.post('/test',asyncHandler(async (req,res,next) => {
      const result = await invoke.testInvoke('user1')
+	 const origin = request.get('origin');
+	 res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
      res.send(result)
  }))
 
@@ -43,6 +58,11 @@
   */
  app.post('/blood/create/:bagId/:bagOriginID/:bagLocation/:bloodType/:bloodRH/:size/:user', asyncHandler(async (req,res,next) =>{
     const received = req.params
+	 const origin = req.get('origin');
+	 res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
     if(received.bagId == "" || received.bagOriginID == "" || received.bagLocation == "" || received.bloodType == "" || received.bloodRH == "" || received.size == "" || received.user == ""){
         res.sendStatus(500)
     }
@@ -56,6 +76,11 @@
   */
  app.get('/blood/read/:bagId/:user',asyncHandler(async (req,res,next) => {
      const received = req.params
+	 const origin = req.get('origin');
+	 res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
      if(received.bagId == "" || received.user == "") {
         res.sendStatus(500)
      }
@@ -68,6 +93,11 @@
   */
  app.get('/blood/history/:bagId/:user',asyncHandler(async (req,res,next) => {
     const received = req.params
+	 const origin = req.get('origin');
+	 res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
     if(received.bagId == "" || received.user == "") {
        res.sendStatus(500)
     }
@@ -80,6 +110,11 @@
  */
 app.post('/blood/move/:bagId/:location/:user',asyncHandler(async (req,res,next) => {
     const received = req.params
+	const origin = req.get('origin');
+	res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
     if(received.bagId == "" || received.location == "" || received.user == ""){
         res.sendStatus(500)
     }
@@ -89,6 +124,11 @@ app.post('/blood/move/:bagId/:location/:user',asyncHandler(async (req,res,next) 
 
 app.post('/blood/assign/:bagId/:recipient/:destination/:user',asyncHandler(async (req,res,next) => {
     const received = req.params
+	const origin = req.get('origin');
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
     if(received.bagId == "" || received.recipient == "" || received.destination == "" || received.user == ""){
         res.sendStatus(500)
     }
